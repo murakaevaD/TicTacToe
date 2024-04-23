@@ -1,5 +1,4 @@
 set(SOURCES
-    main.cpp
     gameboard.cpp
 )
 
