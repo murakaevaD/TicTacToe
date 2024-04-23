@@ -1,58 +1,53 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QSignalMapper>
+#include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), boardSize(3) {
-    setupUi();
-    createGameBoard(boardSize);
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    board = new GameBoard(3); // Можно сделать размер доски настраиваемым
+    gridLayout = new QGridLayout;
+
+    QWidget *widget = new QWidget(this);
+    setCentralWidget(widget);
+    widget->setLayout(gridLayout);
+
+    createBoard();
 }
 
 MainWindow::~MainWindow() {
-    for (auto &row : buttons) {
-        for (auto *button : row) {
-            delete button;
-        }
-    }
-    delete gameBoard;
-    delete resetButton;
-    delete winnerButton;
+    delete ui;
+    delete board;
 }
 
-void MainWindow::setupUi() {
-    QWidget *centralWidget = new QWidget(this);
-    setCentralWidget(centralWidget);
-    QGridLayout *layout = new QGridLayout(centralWidget);
-
-    for (int i = 0; i < boardSize; i++) {
-        QVector<QPushButton*> buttonRow;
-        for (int j = 0; j < boardSize; j++) {
-            QPushButton *button = new QPushButton(" ", this);
+void MainWindow::createBoard() {
+    buttons.resize(board->size(), std::vector<QPushButton*>(board->size()));
+    for (int row = 0; row < board->size(); ++row) {
+        for (int col = 0; col < board->size(); ++col) {
+            QPushButton *button = new QPushButton("");
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-            layout->addWidget(button, i, j);
-            buttonRow.push_back(button);
-            connect(button, &QPushButton::clicked, this, [this, i, j] { handleButton(i, j); });
+            button->setFont(QFont("Arial", 24));
+            gridLayout->addWidget(button, row, col);
+            buttons[row][col] = button;
+            connect(button, &QPushButton::clicked, this, [this, row, col] { handleButton(row, col); });
         }
-        buttons.push_back(buttonRow);
     }
-    resetButton = new QPushButton("Reset Game", this);
-    layout->addWidget(resetButton, boardSize, 0, 1, boardSize);
-    connect(resetButton, &QPushButton::clicked, this, &MainWindow::resetGame);
-
-    winnerButton = new QPushButton("Announce Winner", this);
-    layout->addWidget(winnerButton, boardSize + 1, 0, 1, boardSize);
-    connect(winnerButton, &QPushButton::clicked, this, &MainWindow::announceWinner);
 }
 
-void MainWindow::createGameBoard(int size) {
-
+void MainWindow::handleButton(int row, int col) {
+    if (board->getPlayerAt(row, col) == Player::None) {
+        board->makeMove(row, col);
+        updateButton(buttons[row][col], row, col);
+        if (board->checkWin()) {
+            QMessageBox::information(this, "Game Over", "Player " + QString(board->currentPlayer() == Player::X ? "O" : "X") + " wins!");
+        }
+    }
 }
 
-void MainWindow::handleButton(int row, int column) {
-
-}
-
-void MainWindow::resetGame() {
-
-}
-
-void MainWindow::announceWinner() {
-
+void MainWindow::updateButton(QPushButton *button, int row, int col) {
+    Player player = board->getPlayerAt(row, col);
+    if (player != Player::None) {
+        button->setText(player == Player::X ? "X" : "O");
+        button->setEnabled(false);
+    }
 }

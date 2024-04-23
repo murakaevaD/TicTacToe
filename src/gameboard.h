@@ -2,36 +2,23 @@
 #define GAMEBOARD_H
 
 #include <vector>
-#include <QString>
 
-class Player {
-public:
-    explicit Player(QString symbol) : symbol(symbol) {}
-
-    QString getSymbol() const { return symbol; }
-
-private:
-    QString symbol;
-};
+enum class Player { None, X, O };
 
 class GameBoard {
 public:
-    explicit GameBoard(int size = 3);
-    void reset();
-    bool makeMove(int row, int col, Player* player);
-    Player* getCurrentPlayer() const;
-    Player* checkWinner() const;
-    void switchPlayers();
+    GameBoard(int size = 3);
+    Player currentPlayer() const;
+    void makeMove(int row, int col);
+    bool checkWin() const;
+    int size() const;
+    Player getPlayerAt(int row, int col) const;
 
 private:
-    int size;
-    std::vector<std::vector<Player*>> board;
-    Player player1, player2;
-    Player* currentPlayer;
-
-    bool checkRows() const;
-    bool checkCols() const;
-    bool checkDiagonals() const;
+    std::vector<std::vector<Player>> board;
+    Player current;
+    int boardSize;
+    bool isWin(Player player) const;
 };
 
-#endif // GAMEBOARD_H
+#endif
