@@ -15,6 +15,8 @@ public:
 
 private slots:
     void handleButton(int row, int column);
+    void resetGame();
+    void announceWinner();
 
 private:
     void setupUi();
@@ -22,6 +24,8 @@ private:
 
     GameBoard *gameBoard;
     QVector<QVector<QPushButton*>> buttons;
+    QPushButton *resetButton;
+    QPushButton *winnerButton;
     int boardSize;
 };
 
