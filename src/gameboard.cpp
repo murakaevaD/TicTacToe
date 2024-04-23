@@ -24,7 +24,6 @@ Player GameBoard::getPlayerAt(int row, int col) const {
 }
 
 bool GameBoard::isWin(Player player) const {
-    // Проверка строк
     for (int row = 0; row < boardSize; ++row) {
         bool rowWin = true;
         for (int col = 0; col < boardSize; ++col) {
@@ -36,7 +35,6 @@ bool GameBoard::isWin(Player player) const {
         if (rowWin) return true;
     }
 
-    // Проверка столбцов
     for (int col = 0; col < boardSize; ++col) {
         bool colWin = true;
         for (int row = 0; row < boardSize; ++row) {
@@ -48,7 +46,6 @@ bool GameBoard::isWin(Player player) const {
         if (colWin) return true;
     }
 
-    // Проверка главной диагонали
     bool mainDiagWin = true;
     for (int i = 0; i < boardSize; ++i) {
         if (board[i][i] != player) {
@@ -58,7 +55,6 @@ bool GameBoard::isWin(Player player) const {
     }
     if (mainDiagWin) return true;
 
-    // Проверка побочной диагонали
     bool secDiagWin = true;
     for (int i = 0; i < boardSize; ++i) {
         if (board[i][boardSize - i - 1] != player) {

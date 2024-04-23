@@ -6,7 +6,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    board = new GameBoard(5);
+    board = new GameBoard(3);
     gridLayout = new QGridLayout;
 
     QWidget *widget = new QWidget(this);
@@ -48,7 +48,7 @@ void MainWindow::resetGame() {
         }
     }
     delete board;
-    board = new GameBoard(5);
+    board = new GameBoard(3);
 }
 
 void MainWindow::handleButton(int row, int col) {
