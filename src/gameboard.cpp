@@ -15,10 +15,6 @@ void GameBoard::makeMove(int row, int col) {
     }
 }
 
-bool GameBoard::checkWin() const {
-    return isWin(Player::X) || isWin(Player::O);
-}
-
 int GameBoard::size() const {
     return boardSize;
 }
@@ -28,8 +24,55 @@ Player GameBoard::getPlayerAt(int row, int col) const {
 }
 
 bool GameBoard::isWin(Player player) const {
-    // Проверка победы по строкам, столбцам и диагоналям
+    // Проверка строк
+    for (int row = 0; row < boardSize; ++row) {
+        bool rowWin = true;
+        for (int col = 0; col < boardSize; ++col) {
+            if (board[row][col] != player) {
+                rowWin = false;
+                break;
+            }
+        }
+        if (rowWin) return true;
+    }
+
+    // Проверка столбцов
+    for (int col = 0; col < boardSize; ++col) {
+        bool colWin = true;
+        for (int row = 0; row < boardSize; ++row) {
+            if (board[row][col] != player) {
+                colWin = false;
+                break;
+            }
+        }
+        if (colWin) return true;
+    }
+
+    // Проверка главной диагонали
+    bool mainDiagWin = true;
+    for (int i = 0; i < boardSize; ++i) {
+        if (board[i][i] != player) {
+            mainDiagWin = false;
+            break;
+        }
+    }
+    if (mainDiagWin) return true;
+
+    // Проверка побочной диагонали
+    bool secDiagWin = true;
+    for (int i = 0; i < boardSize; ++i) {
+        if (board[i][boardSize - i - 1] != player) {
+            secDiagWin = false;
+            break;
+        }
+    }
+    if (secDiagWin) return true;
+
     return false;
+}
+
+bool GameBoard::checkWin() const {
+    return isWin(Player::X) || isWin(Player::O);
 }
 
 bool GameBoard::isBoardFull() const {
