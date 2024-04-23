@@ -13,12 +13,13 @@ public:
     bool checkWin() const;
     int size() const;
     Player getPlayerAt(int row, int col) const;
+    bool isWin(Player player) const;
+    bool isBoardFull() const;
 
 private:
     std::vector<std::vector<Player>> board;
     Player current;
     int boardSize;
-    bool isWin(Player player) const;
 };
 
 #endif

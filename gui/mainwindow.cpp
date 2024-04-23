@@ -2,22 +2,22 @@
 #include "ui_mainwindow.h"
 #include <QSignalMapper>
 #include <QMessageBox>
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    board = new GameBoard(3); // Можно сделать размер доски настраиваемым
+    board = new GameBoard(5);
     gridLayout = new QGridLayout;
 
     QWidget *widget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout(widget);
+    widget->setLayout(mainLayout);
     setCentralWidget(widget);
-    widget->setLayout(gridLayout);
 
     createBoard();
-}
-
-MainWindow::~MainWindow() {
-    delete ui;
-    delete board;
+    createResetButton();
+    mainLayout->addLayout(gridLayout);
+    mainLayout->addWidget(resetButton);
 }
 
 void MainWindow::createBoard() {
@@ -34,15 +34,45 @@ void MainWindow::createBoard() {
     }
 }
 
+void MainWindow::createResetButton() {
+    resetButton = new QPushButton("Restart Game");
+    resetButton->setFont(QFont("Arial", 16));
+    connect(resetButton, &QPushButton::clicked, this, &MainWindow::resetGame);
+}
+
+void MainWindow::resetGame() {
+    for (int row = 0; row < board->size(); ++row) {
+        for (int col = 0; col < board->size(); ++col) {
+            buttons[row][col]->setText("");
+            buttons[row][col]->setEnabled(true);
+        }
+    }
+    delete board;
+    board = new GameBoard(5);
+}
+
 void MainWindow::handleButton(int row, int col) {
     if (board->getPlayerAt(row, col) == Player::None) {
         board->makeMove(row, col);
         updateButton(buttons[row][col], row, col);
         if (board->checkWin()) {
             QMessageBox::information(this, "Game Over", "Player " + QString(board->currentPlayer() == Player::X ? "O" : "X") + " wins!");
+            for (auto &row : buttons) {
+                for (auto &button : row) {
+                    button->setEnabled(false);
+                }
+            }
+        } else if (board->isBoardFull()) {
+            QMessageBox::information(this, "Game Over", "It is a draw!");
+            for (auto &row : buttons) {
+                for (auto &button : row) {
+                    button->setEnabled(false);
+                }
+            }
         }
     }
 }
+
 
 void MainWindow::updateButton(QPushButton *button, int row, int col) {
     Player player = board->getPlayerAt(row, col);
@@ -50,4 +80,9 @@ void MainWindow::updateButton(QPushButton *button, int row, int col) {
         button->setText(player == Player::X ? "X" : "O");
         button->setEnabled(false);
     }
+}
+
+MainWindow::~MainWindow() {
+    delete ui;
+    delete board;
 }

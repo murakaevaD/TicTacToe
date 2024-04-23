@@ -31,3 +31,14 @@ bool GameBoard::isWin(Player player) const {
     // Проверка победы по строкам, столбцам и диагоналям
     return false;
 }
+
+bool GameBoard::isBoardFull() const {
+    for (const auto& row : board) {
+        for (auto cell : row) {
+            if (cell == Player::None) {
+                return false;
+            }
+        }
+    }
+    return true;
+}

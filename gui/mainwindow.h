@@ -19,14 +19,17 @@ public:
 
 private slots:
     void handleButton(int row, int col);
+    void resetGame();
 
 private:
+    void createBoard();
     Ui::MainWindow *ui;
     GameBoard *board;
     QGridLayout *gridLayout;
+    QPushButton *resetButton;
     std::vector<std::vector<QPushButton*>> buttons;
-    void createBoard();
     void updateButton(QPushButton *button, int row, int col);
+    void createResetButton();
 };
 
 #endif
