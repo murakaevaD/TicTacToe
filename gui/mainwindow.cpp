@@ -32,6 +32,13 @@ void MainWindow::setupUi() {
         }
         buttons.push_back(buttonRow);
     }
+    resetButton = new QPushButton("Reset Game", this);
+    layout->addWidget(resetButton, boardSize, 0, 1, boardSize);
+    connect(resetButton, &QPushButton::clicked, this, &MainWindow::resetGame);
+
+    winnerButton = new QPushButton("Announce Winner", this);
+    layout->addWidget(winnerButton, boardSize + 1, 0, 1, boardSize);
+    connect(winnerButton, &QPushButton::clicked, this, &MainWindow::announceWinner);
 }
 
 void MainWindow::createGameBoard(int size) {
@@ -42,3 +49,10 @@ void MainWindow::handleButton(int row, int column) {
 
 }
 
+void MainWindow::resetGame() {
+
+}
+
+void MainWindow::announceWinner() {
+
+}
