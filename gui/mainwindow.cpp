@@ -4,27 +4,60 @@
 #include <QMessageBox>
 #include <QVBoxLayout>
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QVBoxLayout>
+#include <QLabel>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    board = new GameBoard(3);
-    gridLayout = new QGridLayout;
+    setupInitialUI();
+}
 
+void MainWindow::setupInitialUI() {
     QWidget *widget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout(widget);
-    widget->setLayout(mainLayout);
+    sizeSpinBox = new QSpinBox();
+    sizeSpinBox->setRange(3, 10);
+    sizeSpinBox->setValue(3);
+    newGameButton = new QPushButton("New Game");
+    resetButton = new QPushButton("Reset Game");
+    gridLayout = new QGridLayout();
+
+    mainLayout->addWidget(new QLabel("Select board size:"));
+    mainLayout->addWidget(sizeSpinBox);
+    mainLayout->addWidget(newGameButton);
+    mainLayout->addWidget(resetButton);
+    mainLayout->addLayout(gridLayout);
     setCentralWidget(widget);
 
+    connect(newGameButton, &QPushButton::clicked, this, &MainWindow::startNewGame);
+    connect(resetButton, &QPushButton::clicked, this, &MainWindow::resetGame);
+    startNewGame();
+}
+
+void MainWindow::startNewGame() {
+    clearBoard();
+    board = new GameBoard(sizeSpinBox->value());
     createBoard();
-    createResetButton();
-    mainLayout->addLayout(gridLayout);
-    mainLayout->addWidget(resetButton);
+}
+
+
+void MainWindow::clearBoard() {
+    for (auto &row : buttons) {
+        for (auto &button : row) {
+            gridLayout->removeWidget(button);
+            delete button;
+        }
+    }
+    buttons.clear();
 }
 
 void MainWindow::createBoard() {
     buttons.resize(board->size(), std::vector<QPushButton*>(board->size()));
     for (int row = 0; row < board->size(); ++row) {
         for (int col = 0; col < board->size(); ++col) {
-            QPushButton *button = new QPushButton("");
+            QPushButton *button = new QPushButton();
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setFont(QFont("Arial", 24));
             gridLayout->addWidget(button, row, col);
@@ -34,22 +67,18 @@ void MainWindow::createBoard() {
     }
 }
 
-void MainWindow::createResetButton() {
-    resetButton = new QPushButton("Restart Game");
-    resetButton->setFont(QFont("Arial", 16));
-    connect(resetButton, &QPushButton::clicked, this, &MainWindow::resetGame);
-}
 
 void MainWindow::resetGame() {
-    for (int row = 0; row < board->size(); ++row) {
-        for (int col = 0; col < board->size(); ++col) {
-            buttons[row][col]->setText("");
-            buttons[row][col]->setEnabled(true);
+    for (auto &row : buttons) {
+        for (auto &button : row) {
+            button->setText("");
+            button->setEnabled(true);
         }
     }
     delete board;
-    board = new GameBoard(3);
+    board = new GameBoard(sizeSpinBox->value());
 }
+
 
 void MainWindow::handleButton(int row, int col) {
     if (board->getPlayerAt(row, col) == Player::None) {
