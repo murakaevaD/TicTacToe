@@ -13,3 +13,4 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(gui)
+add_subdirectory(tests)
