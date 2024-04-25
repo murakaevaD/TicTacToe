@@ -7,4 +7,4 @@ set(HEADERS
 )
 
 add_library(core ${SOURCES} ${HEADERS})
-target_link_libraries(core Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(core Qt6::Widgets)

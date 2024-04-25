@@ -1,125 +1,156 @@
-#include <gtest/gtest.h>
-#include "GameBoard.h"
+#include "tictactoetests.h"
+#include <gameboard.h>
 
-class GameBoardTest : public ::testing::Test {
-protected:
-    GameBoard board;
+void TestGameBoard::testHorizontalWin() {
+    GameBoard board(3);
 
-    void SetUp() override {
-        board = GameBoard(3);
-    }
-};
+    // Победа в первой строке
+    board.makeMove(0, 0); // X
+    board.makeMove(1, 0); // O
+    board.makeMove(0, 1); // X
+    board.makeMove(1, 1); // O
+    board.makeMove(0, 2); // X
+    QVERIFY(board.checkWin());
 
-TEST_F(GameBoardTest, HorizontalWin) {
-    board.makeMove(0, 0);  // X
-    board.makeMove(1, 0);  // O
-    board.makeMove(0, 1);  // X
-    board.makeMove(1, 1);  // O
-    board.makeMove(0, 2);  // X
+    // Победа во второй строке
+    GameBoard board2(3);
+    board2.makeMove(1, 0); // X
+    board2.makeMove(0, 0); // O
+    board2.makeMove(1, 1); // X
+    board2.makeMove(0, 1); // O
+    board2.makeMove(1, 2); // X
+    QVERIFY(board2.checkWin());
 
-    ASSERT_TRUE(board.isWin(Player::X));
-    ASSERT_FALSE(board.isWin(Player::O));
+    // Победа в третьей строке
+    GameBoard board3(3);
+    board3.makeMove(2, 0); // X
+    board3.makeMove(0, 0); // O
+    board3.makeMove(2, 1); // X
+    board3.makeMove(0, 1); // O
+    board3.makeMove(2, 2); // X
+    QVERIFY(board3.checkWin());
 }
 
-TEST_F(GameBoardTest, VerticalWin) {
-    board.makeMove(0, 0);  // X
-    board.makeMove(0, 1);  // O
-    board.makeMove(1, 0);  // X
-    board.makeMove(1, 1);  // O
-    board.makeMove(2, 0);  // X
 
-    ASSERT_TRUE(board.isWin(Player::X));
-    ASSERT_FALSE(board.isWin(Player::O));
+void TestGameBoard::testVerticalWin() {
+    GameBoard board(3);
+
+    // Победа в первом столбце
+    board.makeMove(0, 0); // X
+    board.makeMove(0, 1); // O
+    board.makeMove(1, 0); // X
+    board.makeMove(1, 1); // O
+    board.makeMove(2, 0); // X
+    QVERIFY(board.checkWin());
+
+    // Победа во втором столбце
+    GameBoard board2(3);
+    board2.makeMove(0, 1); // X
+    board2.makeMove(0, 0); // O
+    board2.makeMove(1, 1); // X
+    board2.makeMove(1, 0); // O
+    board2.makeMove(2, 1); // X
+    QVERIFY(board2.checkWin());
+
+    // Победа в третьем столбце
+    GameBoard board3(3);
+    board3.makeMove(0, 2); // X
+    board3.makeMove(0, 0); // O
+    board3.makeMove(1, 2); // X
+    board3.makeMove(1, 0); // O
+    board3.makeMove(2, 2); // X
+    QVERIFY(board3.checkWin());
 }
 
-TEST_F(GameBoardTest, DiagonalWin) {
-    board.makeMove(0, 0);  // X
-    board.makeMove(1, 0);  // O
-    board.makeMove(1, 1);  // X
-    board.makeMove(2, 1);  // O
-    board.makeMove(2, 2);  // X
+void TestGameBoard::testDiagonalWin() {
+    GameBoard board(3);
 
-    ASSERT_TRUE(board.isWin(Player::X));
-    ASSERT_FALSE(board.isWin(Player::O));
+    // Победа по главной диагонали
+    board.makeMove(0, 0); // X
+    board.makeMove(0, 1); // O
+    board.makeMove(1, 1); // X
+    board.makeMove(1, 0); // O
+    board.makeMove(2, 2); // X
+    QVERIFY(board.checkWin());
+
+    // Победа по побочной диагонали
+    GameBoard board2(3);
+    board2.makeMove(0, 2); // X
+    board2.makeMove(0, 1); // O
+    board2.makeMove(1, 1); // X
+    board2.makeMove(1, 0); // O
+    board2.makeMove(2, 0); // X
+    QVERIFY(board2.checkWin());
 }
 
-TEST_F(GameBoardTest, SecondaryDiagonalWin) {
-    board.makeMove(0, 2);  // X
-    board.makeMove(0, 1);  // O
-    board.makeMove(1, 1);  // X
-    board.makeMove(0, 0);  // O
-    board.makeMove(2, 0);  // X
-
-    ASSERT_TRUE(board.isWin(Player::X));
-    ASSERT_FALSE(board.isWin(Player::O));
-}
-
-TEST_F(GameBoardTest, DrawTest1) {
+void TestGameBoard::testDraw1() {
+    GameBoard board(3);
     board.makeMove(0, 0); // X
     board.makeMove(0, 1); // O
     board.makeMove(0, 2); // X
-    board.makeMove(1, 0); // O
-    board.makeMove(1, 1); // X
-    board.makeMove(1, 2); // O
-    board.makeMove(2, 0); // X
+    board.makeMove(1, 1); // O
+    board.makeMove(1, 0); // X
+    board.makeMove(2, 0); // O
+    board.makeMove(1, 2); // X
     board.makeMove(2, 1); // O
     board.makeMove(2, 2); // X
-
-    ASSERT_TRUE(board.isBoardFull());
+    QVERIFY(board.isBoardFull());
 }
 
-TEST_F(GameBoardTest, DrawTest2) {
-    board.makeMove(0, 0); // O
-    board.makeMove(0, 1); // X
-    board.makeMove(0, 2); // O
-    board.makeMove(1, 0); // X
-    board.makeMove(1, 1); // O
-    board.makeMove(1, 2); // X
-    board.makeMove(2, 0); // O
-    board.makeMove(2, 1); // X
-    board.makeMove(2, 2); // O
-
-    ASSERT_TRUE(board.isBoardFull());
-}
-
-TEST_F(GameBoardTest, DrawTest3) {
+void TestGameBoard::testDraw2() {
+    GameBoard board(3);
     board.makeMove(0, 0); // X
-    board.makeMove(0, 1); // X
     board.makeMove(0, 2); // O
-    board.makeMove(1, 0); // O
-    board.makeMove(1, 1); // O
-    board.makeMove(1, 2); // X
     board.makeMove(2, 0); // X
-    board.makeMove(2, 1); // O
-    board.makeMove(2, 2); // X
-
-    ASSERT_TRUE(board.isBoardFull());
-}
-
-TEST_F(GameBoardTest, DrawTest4) {
-    board.makeMove(0, 0); // O
-    board.makeMove(0, 1); // O
-    board.makeMove(0, 2); // X
-    board.makeMove(1, 0); // X
-    board.makeMove(1, 1); // X
-    board.makeMove(1, 2); // O
-    board.makeMove(2, 0); // O
-    board.makeMove(2, 1); // X
     board.makeMove(2, 2); // O
-
-    ASSERT_TRUE(board.isBoardFull());
+    board.makeMove(1, 1); // X
+    board.makeMove(0, 1); // O
+    board.makeMove(1, 0); // X
+    board.makeMove(1, 2); // O
+    board.makeMove(2, 1); // X
+    QVERIFY(board.isBoardFull());
 }
 
-TEST_F(GameBoardTest, DrawTest5) {
+void TestGameBoard::testDraw3() {
+    GameBoard board(3);
+    board.makeMove(1, 1); // X
+    board.makeMove(0, 0); // O
+    board.makeMove(0, 2); // X
+    board.makeMove(2, 0); // O
+    board.makeMove(2, 2); // X
+    board.makeMove(0, 1); // O
+    board.makeMove(2, 1); // X
+    board.makeMove(1, 0); // O
+    board.makeMove(1, 2); // X
+    QVERIFY(board.isBoardFull());
+}
+
+void TestGameBoard::testDraw4() {
+    GameBoard board(3);
     board.makeMove(0, 0); // X
     board.makeMove(0, 1); // O
     board.makeMove(0, 2); // X
-    board.makeMove(1, 0); // X
-    board.makeMove(1, 1); // O
     board.makeMove(1, 2); // O
-    board.makeMove(2, 0); // O
-    board.makeMove(2, 1); // X
     board.makeMove(2, 2); // X
-    ASSERT_TRUE(board.isBoardFull());
+    board.makeMove(2, 1); // O
+    board.makeMove(2, 0); // X
+    board.makeMove(1, 0); // O
+    board.makeMove(1, 1); // X
+    QVERIFY( board.isBoardFull());
 }
 
+void TestGameBoard::testDraw5() {
+    GameBoard board(3);
+    board.makeMove(0, 0); // X
+    board.makeMove(0, 2); // O
+    board.makeMove(0, 1); // X
+    board.makeMove(1, 0); // O
+    board.makeMove(1, 2); // X
+    board.makeMove(2, 0); // O
+    board.makeMove(2, 2); // X
+    board.makeMove(2, 1); // O
+    board.makeMove(1, 1); // X
+    QVERIFY(board.isBoardFull());
+}
+
+QTEST_MAIN(TestGameBoard)

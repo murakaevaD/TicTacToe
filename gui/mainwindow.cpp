@@ -3,13 +3,9 @@
 #include <QSignalMapper>
 #include <QMessageBox>
 #include <QVBoxLayout>
-
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <QVBoxLayout>
 #include <QLabel>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     setupInitialUI();
 }
@@ -112,6 +108,5 @@ void MainWindow::updateButton(QPushButton *button, int row, int col) {
 }
 
 MainWindow::~MainWindow() {
-    delete ui;
     delete board;
 }
