@@ -7,7 +7,7 @@ enum class Player { None, X, O };
 
 class GameBoard {
 public:
-    GameBoard(int size = 3);
+    GameBoard(int initialSize = 3);
     Player currentPlayer() const;
     void makeMove(int row, int col);
     bool checkWin() const;
@@ -19,7 +19,13 @@ public:
 private:
     std::vector<std::vector<Player>> board;
     Player current;
-    int boardSize;
+    int minRow, maxRow, minCol, maxCol;
+
+    void expandBoard(int row, int col);
+    void expandUp();
+    void expandDown();
+    void expandLeft();
+    void expandRight();
 };
 
 #endif

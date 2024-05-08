@@ -31,7 +31,6 @@ void TestGameBoard::testHorizontalWin() {
     QVERIFY(board3.checkWin());
 }
 
-
 void TestGameBoard::testVerticalWin() {
     GameBoard board(3);
 
