@@ -2,13 +2,21 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGridLayout>
 #include <QPushButton>
-#include <QMessageBox>
 #include <QSpinBox>
+#include <QLabel>
+#include <QGridLayout>
+#include <QVBoxLayout>
+#include <QGroupBox>
+#include <QRadioButton>
 #include "gameboard.h"
 
-class MainWindow : public QMainWindow {
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
 
 public:
@@ -16,22 +24,39 @@ public:
     ~MainWindow();
 
 private slots:
-    void handleButton(int row, int col);
-    void resetGame();
     void startNewGame();
+    void handleSurrender();
+    void restartGame();
+    void handleButton(int row, int col);
 
 private:
+    Ui::MainWindow *ui;
+    QWidget *menuWidget;
+    QWidget *gameWidget;
     GameBoard *board;
-    QGridLayout *gridLayout;
-    QPushButton *resetButton;
-    QPushButton *newGameButton;
     std::vector<std::vector<QPushButton*>> buttons;
+    QLabel *turnStatusLabel;
+    QLabel *sizeLabel;
+    QSpinBox *sizeSpinBox;
+    QRadioButton *expandingFieldButton;
+    QRadioButton *fixedFieldButton;
+    QRadioButton *playerXButton;
+    QRadioButton *playerOButton;
+    QRadioButton *humanButton;
+    QRadioButton *computerButton;
+    QPushButton *newGameButton;
+    QGridLayout *gridLayout;
+    bool againstHuman;
 
-    void setupInitialUI();
-    void createBoard(int size, bool infinite);
-    void updateButton(QPushButton *button, int row, int col);
+    void setupMenuUI();
+    void setupGameUI();
     void clearBoard();
-    void setupGameOptions();
+    void createBoard();
+    void updateStatusLabel();
+    void disableBoard();
+    void computerMove();
+    void finalizeGame();
+    void updateBoard();
 };
 
 #endif
