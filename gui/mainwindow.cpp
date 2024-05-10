@@ -1,12 +1,18 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QTimer>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGroupBox>
+#include <QLabel>
+#include <QSpinBox>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
 
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), menuWidget(nullptr), gameWidget(nullptr), expandingFieldButton(nullptr),
+    fixedFieldButton(nullptr), sizeLabel(nullptr), sizeSpinBox(nullptr), winConditionLabel(nullptr), winConditionSpinBox(nullptr),
+    playerXButton(nullptr), playerOButton(nullptr), humanButton(nullptr), computerButton(nullptr), newGameButton(nullptr),
+    turnStatusLabel(nullptr), gridLayout(nullptr), board(nullptr), againstHuman(true) {
     QWidget* centralWidget = new QWidget(this);
     QVBoxLayout* centralLayout = new QVBoxLayout(centralWidget);
 
@@ -22,9 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(centralWidget);
 }
 
-
 MainWindow::~MainWindow() {
-    delete ui;
     delete board;
 }
 
@@ -43,6 +47,11 @@ void MainWindow::setupMenuUI() {
     sizeSpinBox = new QSpinBox();
     sizeSpinBox->setRange(3, 10);
     sizeSpinBox->setValue(3);
+
+    winConditionLabel = new QLabel("Количество символов для победы:");
+    winConditionSpinBox = new QSpinBox();
+    winConditionSpinBox->setRange(3, 10);
+    winConditionSpinBox->setValue(3);
 
     QGroupBox *playerGroup = new QGroupBox("Играть за:");
     QVBoxLayout *playerLayout = new QVBoxLayout(playerGroup);
@@ -64,6 +73,8 @@ void MainWindow::setupMenuUI() {
     layout->addWidget(modeGroup);
     layout->addWidget(sizeLabel);
     layout->addWidget(sizeSpinBox);
+    layout->addWidget(winConditionLabel);
+    layout->addWidget(winConditionSpinBox);
     layout->addWidget(playerGroup);
     layout->addWidget(opponentGroup);
     layout->addWidget(startButton);
@@ -99,18 +110,18 @@ void MainWindow::setupGameUI() {
     gameWidget->hide();
 }
 
-
 void MainWindow::startNewGame() {
     menuWidget->hide();
     gameWidget->show();
 
-    int boardSize = sizeSpinBox->value();
     againstHuman = humanButton->isChecked();
+    bool expandingField = expandingFieldButton->isChecked();
 
     if (board) {
         delete board;
     }
-    board = new GameBoard(boardSize);
+    board = new GameBoard(sizeSpinBox->value());
+    board->setExpandingMode(expandingField);
 
     if (!againstHuman) {
         Player startingPlayer = playerXButton->isChecked() ? Player::X : Player::O;
@@ -123,11 +134,10 @@ void MainWindow::startNewGame() {
         board->setCurrentPlayer(Player::X);
     }
 
-    clearBoard();
+    board->clearBoard();
     createBoard();
     updateStatusLabel();
 }
-
 
 void MainWindow::createBoard() {
     const int boardSize = board->size();
@@ -161,7 +171,6 @@ void MainWindow::handleButton(int row, int col) {
         }
     }
 }
-
 
 void MainWindow::computerMove() {
     board->makeRandomMove();
@@ -207,25 +216,58 @@ void MainWindow::handleSurrender() {
 }
 
 void MainWindow::restartGame() {
-    startNewGame();
-}
-
-void MainWindow::clearBoard() {
-    for (auto &row : buttons) {
-        for (auto &button : row) {
-            button->setText("");
-            button->setEnabled(true);
+    if (expandingFieldButton->isChecked()) {
+        if (board) {
+            delete board;
         }
+        board = new GameBoard(3);
+        board->setExpandingMode(true);
+    } else {
+        board->clearBoard();
     }
+
+    board->setCurrentPlayer(Player::X);
+    updateBoard();
+    updateStatusLabel();
 }
 
 void MainWindow::updateBoard() {
-    for (int row = 0; row < board->size(); ++row) {
-        for (int col = 0; col < board->size(); ++col) {
+    int boardSize = board->size();
+
+    if (buttons.size() != boardSize) {
+        resizeButtons(boardSize);
+    }
+
+    for (int row = 0; row < boardSize; ++row) {
+        for (int col = 0; col < boardSize; ++col) {
             QPushButton *button = buttons[row][col];
             Player player = board->getPlayerAt(row, col);
             button->setText(player == Player::X ? "X" : (player == Player::O ? "O" : ""));
             button->setEnabled(player == Player::None);
+        }
+    }
+}
+
+void MainWindow::resizeButtons(int newSize) {
+    for (auto &row : buttons) {
+        for (auto &button : row) {
+            gridLayout->removeWidget(button);
+            delete button;
+        }
+    }
+    buttons.clear();
+
+    buttons.resize(newSize, std::vector<QPushButton*>(newSize, nullptr));
+    for (int row = 0; row < newSize; ++row) {
+        for (int col = 0; col < newSize; ++col) {
+            QPushButton *button = new QPushButton();
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            button->setFont(QFont("Arial", 24));
+            gridLayout->addWidget(button, row, col);
+            buttons[row][col] = button;
+            connect(button, &QPushButton::clicked, [this, row, col]() {
+                handleButton(row, col);
+            });
         }
     }
 }

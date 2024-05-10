@@ -20,6 +20,11 @@ private slots:
     void testDraw5();
     void testComputerMoves();
     void testGameAgainstComputer();
+    void testExpandTopLeftCorner();
+    void testExpandTopRightCorner();
+    void testExpandBottomLeftCorner();
+    void testExpandBottomRightCorner();
+    void testIgnoreExpansionAtMaxSize();
     void cleanupTestCase();
     void testMemoryLeak();
 

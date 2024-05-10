@@ -193,6 +193,54 @@ void TestGameBoard::testGameAgainstComputer() {
     delete board;
 }
 
+void TestGameBoard::testExpandTopLeftCorner()
+{
+    GameBoard gameBoard;
+    gameBoard.expandBoard(0, 0);
+    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.getPlayerAt(0, 0), Player::None); // Левый верхний угол пустой
+    QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
+}
+
+void TestGameBoard::testExpandTopRightCorner()
+{
+    GameBoard gameBoard;
+    gameBoard.expandBoard(0, 2);
+    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.getPlayerAt(0, 3), Player::None); // Правый верхний угол пустой
+    QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
+}
+
+void TestGameBoard::testExpandBottomLeftCorner()
+{
+    GameBoard gameBoard;
+    gameBoard.expandBoard(2, 0);
+    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.getPlayerAt(3, 0), Player::None); // Левый нижний угол пустой
+    QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
+}
+
+void TestGameBoard::testExpandBottomRightCorner()
+{
+    GameBoard gameBoard;
+    gameBoard.expandBoard(2, 2);
+    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.getPlayerAt(3, 3), Player::None); // Правый нижний угол пустой
+    QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
+}
+
+void TestGameBoard::testIgnoreExpansionAtMaxSize()
+{
+    GameBoard gameBoard;
+    // Заполним игровое поле до максимального размера
+    while (gameBoard.boardSize < 15) {
+        gameBoard.expandBoard(0, 0);
+    }
+    // Попробуем расширить поле еще раз
+    gameBoard.expandBoard(0, 0);
+    QCOMPARE(gameBoard.boardSize, 15); // Размер поля не изменился
+    QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
+}
 void TestGameBoard::testMemoryLeak() {
     board = new GameBoard(3);  // Создаём доску 3x3
     QVERIFY(board != nullptr); // Проверяем, что объект создан

@@ -1,3 +1,4 @@
+// gameboard.h
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
 
@@ -7,25 +8,29 @@ enum class Player { None, X, O };
 
 class GameBoard {
 public:
-    explicit GameBoard(int size = 3);
-    Player currentPlayer() const;
-    Player getPlayerAt(int row, int col) const;
+    GameBoard(int size = 3);
+
     void makeMove(int row, int col);
-    void makeRandomMove();
-    void setSize(int newSize);
+    bool isWin(Player player) const;
+    bool checkWin() const;
+    bool isBoardFull() const;
     void setCurrentPlayer(Player player);
+    Player currentPlayer() const;
+    int size() const;
+    Player getPlayerAt(int row, int col) const;
+    void makeRandomMove();
+    void expandBoard(int row, int col);
     void reset();
     void clearBoard();
-    bool checkWin() const;
-    void extracted(Player &player, int &row, bool &rowWin) const;
-    bool isWin(Player player) const;
-    bool isBoardFull() const;
-    int size() const;
+    void setExpandingMode(bool enabled);
 
 private:
     std::vector<std::vector<Player>> board;
-    Player current;
     int boardSize;
+    Player current;
+    bool expandingMode;
+
+    friend class TestGameBoard;
 };
 
 #endif // GAMEBOARD_H
