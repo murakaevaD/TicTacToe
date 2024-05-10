@@ -15,6 +15,7 @@ public:
     void setSize(int newSize);
     void setCurrentPlayer(Player player);
     void reset();
+    void clearBoard();
     bool checkWin() const;
     void extracted(Player &player, int &row, bool &rowWin) const;
     bool isWin(Player player) const;
@@ -25,7 +26,6 @@ private:
     std::vector<std::vector<Player>> board;
     Player current;
     int boardSize;
-    void clearBoard();
 };
 
 #endif // GAMEBOARD_H

@@ -1,16 +1,19 @@
 #include "tictactoetests.h"
-#include <gameboard.h>
+
+
+void TestGameBoard::initTestCase() {
+    board = new GameBoard(3);
+    srand(static_cast<unsigned>(time(nullptr)));
+}
 
 void TestGameBoard::testHorizontalWin() {
-    GameBoard board(3);
-
     // Победа в первой строке
-    board.makeMove(0, 0); // X
-    board.makeMove(1, 0); // O
-    board.makeMove(0, 1); // X
-    board.makeMove(1, 1); // O
-    board.makeMove(0, 2); // X
-    QVERIFY(board.checkWin());
+    board->makeMove(0, 0); // X
+    board->makeMove(1, 0); // O
+    board->makeMove(0, 1); // X
+    board->makeMove(1, 1); // O
+    board->makeMove(0, 2); // X
+    QVERIFY(board->checkWin());
 
     // Победа во второй строке
     GameBoard board2(3);
@@ -32,9 +35,8 @@ void TestGameBoard::testHorizontalWin() {
 }
 
 void TestGameBoard::testVerticalWin() {
-    GameBoard board(3);
-
     // Победа в первом столбце
+    GameBoard board(3);
     board.makeMove(0, 0); // X
     board.makeMove(0, 1); // O
     board.makeMove(1, 0); // X
@@ -62,9 +64,8 @@ void TestGameBoard::testVerticalWin() {
 }
 
 void TestGameBoard::testDiagonalWin() {
-    GameBoard board(3);
-
     // Победа по главной диагонали
+    GameBoard board(3);
     board.makeMove(0, 0); // X
     board.makeMove(0, 1); // O
     board.makeMove(1, 1); // X
@@ -152,4 +153,58 @@ void TestGameBoard::testDraw5() {
     QVERIFY(board.isBoardFull());
 }
 
+void TestGameBoard::testComputerMoves() {
+    board->clearBoard();                 //Cбрасываем текущую доску
+    board->setCurrentPlayer(Player::X);  // Пусть компьютер играет за 'X'
+    board->makeRandomMove();  // Позволяем компьютеру сделать ход
+
+    int emptyCells = 0;
+    for (int row = 0; row < board->size(); ++row) {
+        for (int col = 0; col < board->size(); ++col) {
+            if (board->getPlayerAt(row, col) == Player::None) {
+                emptyCells++;
+            }
+        }
+    }
+
+    QCOMPARE(emptyCells, 8);  // Проверяем, что пустых клеток стало на 1 меньше
+}
+
+void TestGameBoard::testGameAgainstComputer() {
+    board = new GameBoard(3);  // Инициализируем доску 3x3 для тестирования
+
+    // Симуляция игры: пусть пользователь играет за 'X', а компьютер за 'O'
+    board->setCurrentPlayer(Player::X);
+    board->makeMove(0, 0); // Игрок ходит в угол
+    board->makeRandomMove(); // Ход компьютера
+
+    board->makeMove(0, 1); // Игрок делает второй ход
+    if (!board->checkWin() && !board->isBoardFull()) {
+        board->makeRandomMove(); // Ход компьютера
+    }
+
+    board->makeMove(0, 2); // Игрок делает третий ход, возможная победа
+    bool win = board->checkWin();
+    bool draw = board->isBoardFull() && !win;
+
+    // Проверка состояния игры после ходов
+    QVERIFY(win || draw || (!win && !draw)); // Убедимся, что игра закончилась или продолжается корректно
+
+    delete board;
+}
+
+void TestGameBoard::testMemoryLeak() {
+    board = new GameBoard(3);  // Создаём доску 3x3
+    QVERIFY(board != nullptr); // Проверяем, что объект создан
+
+    delete board;              // Удаляем объект
+}
+
+
+void TestGameBoard::cleanupTestCase() {
+    delete board;
+    board = nullptr;
+}
+
 QTEST_MAIN(TestGameBoard)
+

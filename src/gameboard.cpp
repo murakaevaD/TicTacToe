@@ -1,6 +1,5 @@
 #include "gameboard.h"
 #include <cstdlib>
-#include <ctime>
 
 GameBoard::GameBoard(int size) : boardSize(size), current(Player::X) {
     board.resize(boardSize, std::vector<Player>(boardSize, Player::None));
@@ -89,7 +88,6 @@ Player GameBoard::getPlayerAt(int row, int col) const {
 }
 
 void GameBoard::makeRandomMove() {
-    srand(time(nullptr));
     std::vector<std::pair<int, int>> freeCells;
 
     for (int row = 0; row < boardSize; ++row) {

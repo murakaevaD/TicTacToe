@@ -156,7 +156,7 @@ void MainWindow::handleButton(int row, int col) {
         } else {
             updateStatusLabel();
             if (!againstHuman) {
-                QTimer::singleShot(200, this, &MainWindow::computerMove);
+                QTimer::singleShot(300, this, &MainWindow::computerMove);
             }
         }
     }
