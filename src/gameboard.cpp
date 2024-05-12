@@ -1,4 +1,3 @@
-// gameboard.cpp
 #include "gameboard.h"
 #include <cstdlib>
 
@@ -16,26 +15,62 @@ void GameBoard::makeMove(int row, int col) {
     }
 }
 
-bool GameBoard::isWin(Player player) const {
+bool GameBoard::isWin(Player player, int winCondition) const {
+    // Проверяем горизонтальные и вертикальные линии
     for (int i = 0; i < boardSize; ++i) {
-        bool rowWin = true, colWin = true;
+        int rowWinCount = 0, colWinCount = 0;
         for (int j = 0; j < boardSize; ++j) {
-            if (board[i][j] != player) rowWin = false;
-            if (board[j][i] != player) colWin = false;
+            // Горизонтальные линии
+            if (board[i][j] == player) {
+                rowWinCount++;
+                if (rowWinCount == winCondition) return true;
+            } else {
+                rowWinCount = 0;
+            }
+            // Вертикальные линии
+            if (board[j][i] == player) {
+                colWinCount++;
+                if (colWinCount == winCondition) return true;
+            } else {
+                colWinCount = 0;
+            }
         }
-        if (rowWin || colWin) return true;
     }
 
-    bool mainDiagWin = true, secDiagWin = true;
-    for (int i = 0; i < boardSize; ++i) {
-        if (board[i][i] != player) mainDiagWin = false;
-        if (board[i][boardSize - i - 1] != player) secDiagWin = false;
+    // Проверяем главную диагональ
+    for (int i = 0; i <= boardSize - winCondition; ++i) {
+        for (int j = 0; j <= boardSize - winCondition; ++j) {
+            bool diagWin = true;
+            for (int k = 0; k < winCondition; ++k) {
+                if (board[i+k][j+k] != player) {
+                    diagWin = false;
+                    break;
+                }
+            }
+            if (diagWin) return true;
+        }
     }
-    return mainDiagWin || secDiagWin;
+
+    // Проверяем побочную диагональ
+    for (int i = 0; i <= boardSize - winCondition; ++i) {
+        for (int j = winCondition - 1; j < boardSize; ++j) {
+            bool diagWin = true;
+            for (int k = 0; k < winCondition; ++k) {
+                if (board[i+k][j-k] != player) {
+                    diagWin = false;
+                    break;
+                }
+            }
+            if (diagWin) return true;
+        }
+    }
+
+    return false;
 }
 
-bool GameBoard::checkWin() const {
-    return isWin(Player::X) || isWin(Player::O);
+
+bool GameBoard::checkWin(int winCondition) const {
+    return isWin(Player::X, winCondition) || isWin(Player::O, winCondition);
 }
 
 bool GameBoard::isBoardFull() const {

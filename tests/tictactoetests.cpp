@@ -13,7 +13,7 @@ void TestGameBoard::testHorizontalWin() {
     board->makeMove(0, 1); // X
     board->makeMove(1, 1); // O
     board->makeMove(0, 2); // X
-    QVERIFY(board->checkWin());
+    QVERIFY(board->checkWin(board->boardSize));
 
     // Победа во второй строке
     GameBoard board2(3);
@@ -22,7 +22,7 @@ void TestGameBoard::testHorizontalWin() {
     board2.makeMove(1, 1); // X
     board2.makeMove(0, 1); // O
     board2.makeMove(1, 2); // X
-    QVERIFY(board2.checkWin());
+    QVERIFY(board2.checkWin(board2.boardSize));
 
     // Победа в третьей строке
     GameBoard board3(3);
@@ -31,7 +31,7 @@ void TestGameBoard::testHorizontalWin() {
     board3.makeMove(2, 1); // X
     board3.makeMove(0, 1); // O
     board3.makeMove(2, 2); // X
-    QVERIFY(board3.checkWin());
+    QVERIFY(board3.checkWin(board3.boardSize));
 }
 
 void TestGameBoard::testVerticalWin() {
@@ -42,7 +42,7 @@ void TestGameBoard::testVerticalWin() {
     board.makeMove(1, 0); // X
     board.makeMove(1, 1); // O
     board.makeMove(2, 0); // X
-    QVERIFY(board.checkWin());
+    QVERIFY(board.checkWin(board.boardSize));
 
     // Победа во втором столбце
     GameBoard board2(3);
@@ -51,7 +51,7 @@ void TestGameBoard::testVerticalWin() {
     board2.makeMove(1, 1); // X
     board2.makeMove(1, 0); // O
     board2.makeMove(2, 1); // X
-    QVERIFY(board2.checkWin());
+    QVERIFY(board2.checkWin(board2.boardSize));
 
     // Победа в третьем столбце
     GameBoard board3(3);
@@ -60,7 +60,7 @@ void TestGameBoard::testVerticalWin() {
     board3.makeMove(1, 2); // X
     board3.makeMove(1, 0); // O
     board3.makeMove(2, 2); // X
-    QVERIFY(board3.checkWin());
+    QVERIFY(board3.checkWin(board3.boardSize));
 }
 
 void TestGameBoard::testDiagonalWin() {
@@ -71,7 +71,7 @@ void TestGameBoard::testDiagonalWin() {
     board.makeMove(1, 1); // X
     board.makeMove(1, 0); // O
     board.makeMove(2, 2); // X
-    QVERIFY(board.checkWin());
+    QVERIFY(board.checkWin(board.boardSize));
 
     // Победа по побочной диагонали
     GameBoard board2(3);
@@ -80,7 +80,7 @@ void TestGameBoard::testDiagonalWin() {
     board2.makeMove(1, 1); // X
     board2.makeMove(1, 0); // O
     board2.makeMove(2, 0); // X
-    QVERIFY(board2.checkWin());
+    QVERIFY(board2.checkWin(board2.boardSize));
 }
 
 void TestGameBoard::testDraw1() {
@@ -171,7 +171,7 @@ void TestGameBoard::testComputerMoves() {
 }
 
 void TestGameBoard::testGameAgainstComputer() {
-    board = new GameBoard(3);  // Инициализируем доску 3x3 для тестирования
+    board = new GameBoard(3);
 
     // Симуляция игры: пусть пользователь играет за 'X', а компьютер за 'O'
     board->setCurrentPlayer(Player::X);
@@ -179,12 +179,12 @@ void TestGameBoard::testGameAgainstComputer() {
     board->makeRandomMove(); // Ход компьютера
 
     board->makeMove(0, 1); // Игрок делает второй ход
-    if (!board->checkWin() && !board->isBoardFull()) {
+    if (!board->checkWin(board->boardSize) && !board->isBoardFull()) {
         board->makeRandomMove(); // Ход компьютера
     }
 
     board->makeMove(0, 2); // Игрок делает третий ход, возможная победа
-    bool win = board->checkWin();
+    bool win = board->checkWin(board->boardSize);
     bool draw = board->isBoardFull() && !win;
 
     // Проверка состояния игры после ходов
@@ -241,6 +241,43 @@ void TestGameBoard::testIgnoreExpansionAtMaxSize()
     QCOMPARE(gameBoard.boardSize, 15); // Размер поля не изменился
     QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
 }
+
+void TestGameBoard::testMaxExpansionAndWin() {
+    GameBoard board;
+    // Расширяем поле до максимального размера
+    while (board.boardSize < 15) {
+        board.expandBoard(0, 0);
+    }
+
+    // Симуляция игры до победы, где нужно 5 символов в ряд
+    for (int i = 0; i < 10; ++i) {
+        // В этом примере делаем ходы в первую строку, но вы можете изменить это в соответствии с вашими требованиями
+        board.makeMove(0, i);
+        board.makeMove(1, i);
+    }
+
+    // Проверка наличия победы
+    QVERIFY(board.checkWin(5)); // Указываем условие победы, где нужно 5 символов в ряд
+}
+
+void TestGameBoard::testExpandFullBoard() {
+    GameBoard board;
+    // Расширяем поле до максимального размера
+    while (board.boardSize < 15) {
+        board.expandBoard(0, 0);
+    }
+
+    // Заполняем поле полностью
+    for (int row = 0; row < board.boardSize; ++row) {
+        for (int col = 0; col < board.boardSize; ++col) {
+            board.makeMove(row, col);
+        }
+    }
+
+    // Проверка, что доска полностью заполнена
+    QVERIFY(board.isBoardFull());
+}
+
 void TestGameBoard::testMemoryLeak() {
     board = new GameBoard(3);  // Создаём доску 3x3
     QVERIFY(board != nullptr); // Проверяем, что объект создан

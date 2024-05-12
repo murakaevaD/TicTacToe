@@ -1,4 +1,3 @@
-// gameboard.h
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
 
@@ -11,8 +10,8 @@ public:
     GameBoard(int size = 3);
 
     void makeMove(int row, int col);
-    bool isWin(Player player) const;
-    bool checkWin() const;
+    bool isWin(Player player, int winCondition) const;
+    bool checkWin(int winCondition) const;
     bool isBoardFull() const;
     void setCurrentPlayer(Player player);
     Player currentPlayer() const;

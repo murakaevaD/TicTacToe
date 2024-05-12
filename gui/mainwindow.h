@@ -1,4 +1,3 @@
-// mainwindow.h
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -25,8 +24,10 @@ private slots:
     void startNewGame();
     void handleButton(int row, int col);
     void computerMove();
-    void restartGame();
+    void handleBoard();
     void updateBoard();
+    void updateStatusLabel();
+    void handleSurrender();
 
 private:
     QWidget *menuWidget;
@@ -42,20 +43,23 @@ private:
     QRadioButton *humanButton;
     QRadioButton *computerButton;
     QPushButton *newGameButton;
+    QPushButton *surrenderButton;
     QLabel *turnStatusLabel;
     QGridLayout *gridLayout;
+    QSize *Size;
     GameBoard *board;
     std::vector<std::vector<QPushButton*>> buttons;
     bool againstHuman;
+    int winConditions;
 
     void setupMenuUI();
     void setupGameUI();
     void finalizeGame();
-    void updateStatusLabel();
     void disableBoard();
-    void handleSurrender();
-    void createBoard();
     void resizeButtons(int newSize);
+    void toggleFixedField();
+    void toggleExpandingField();
+    void toggleSurrenderButton();
+    void untoggleSurrenderButton();
 };
-
 #endif // MAINWINDOW_H

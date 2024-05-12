@@ -25,6 +25,8 @@ private slots:
     void testExpandBottomLeftCorner();
     void testExpandBottomRightCorner();
     void testIgnoreExpansionAtMaxSize();
+    void testMaxExpansionAndWin();
+    void testExpandFullBoard();
     void cleanupTestCase();
     void testMemoryLeak();
 
