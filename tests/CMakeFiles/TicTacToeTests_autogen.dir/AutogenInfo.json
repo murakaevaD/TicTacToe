@@ -1,13 +1,13 @@
 {
-	"BUILD_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen",
-	"CMAKE_BINARY_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release",
-	"CMAKE_CURRENT_BINARY_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests",
+	"BUILD_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen",
+	"CMAKE_BINARY_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests",
 	"CMAKE_CURRENT_SOURCE_DIR" : "D:/QT/TicTacToeGame/tests",
 	"CMAKE_EXECUTABLE" : "C:/Qt6/Tools/CMake_64/bin/cmake.exe",
 	"CMAKE_LIST_FILES" : 
 	[
 		"D:/QT/TicTacToeGame/tests/CMakeLists.txt",
-		"D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/.qtc/package-manager/auto-setup.cmake",
+		"D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake",
 		"C:/Qt6/6.6.1/mingw_64/lib/cmake/Qt6/Qt6ConfigVersion.cmake",
 		"C:/Qt6/6.6.1/mingw_64/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake",
 		"C:/Qt6/6.6.1/mingw_64/lib/cmake/Qt6/Qt6Config.cmake",
@@ -41,7 +41,7 @@
 		"C:/Qt6/6.6.1/mingw_64/lib/cmake/Qt6Test/Qt6TestVersionlessTargets.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "D:/QT/TicTacToeGame",
-	"DEP_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/deps",
+	"DEP_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "TicTacToeTests_autogen/timestamp",
 	"HEADERS" : 
 	[
@@ -59,15 +59,14 @@
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/include",
-	"MOC_COMPILATION_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/include",
+	"MOC_COMPILATION_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
-		"QT_NO_DEBUG",
-		"QT_TESTCASE_BUILDDIR=\"D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests\"",
+		"QT_TESTCASE_BUILDDIR=\"D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests\"",
 		"QT_TESTCASE_SOURCEDIR=\"D:/QT/TicTacToeGame/tests\"",
 		"QT_TESTLIB_LIB",
 		"QT_WIDGETS_LIB",
@@ -87,7 +86,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests",
+		"D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests",
 		"D:/QT/TicTacToeGame/tests",
 		"D:/QT/TicTacToeGame/src",
 		"D:/QT/TicTacToeGame/gui",
@@ -123,17 +122,17 @@
 		"-c",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 4,
-	"PARSE_CACHE_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/CMakeFiles/TicTacToeTests_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/CMakeFiles/TicTacToeTests_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "C:/Qt6/6.6.1/mingw_64/./bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "C:/Qt6/6.6.1/mingw_64/./bin/uic.exe",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 6,
-	"SETTINGS_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/CMakeFiles/TicTacToeTests_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/CMakeFiles/TicTacToeTests_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[ "D:/QT/TicTacToeGame/src/gameboard.cpp", "MU", null ],

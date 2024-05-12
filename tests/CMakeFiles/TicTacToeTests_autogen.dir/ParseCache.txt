@@ -13,6 +13,7 @@ D:/QT/TicTacToeGame/tests/tictactoetests.h
  mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QMetaEnum
  mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QMutex
  mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QObject
+ mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QPointer
  mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QRect
  mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QSize
  mdp:C:/Qt6/6.6.1/mingw_64/include/QtCore/QSizeF
@@ -674,7 +675,8 @@ D:/QT/TicTacToeGame/tests/tictactoetests.h
  mdp:C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
+ mdp:D:/QT/TicTacToeGame/src/gameboard.h
  mdp:D:/QT/TicTacToeGame/tests/tictactoetests.h
- mdp:D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/moc_predefs.h
+ mdp:D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/moc_predefs.h
 D:/QT/TicTacToeGame/src/gameboard.cpp
 D:/QT/TicTacToeGame/tests/tictactoetests.cpp

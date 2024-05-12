@@ -1,5 +1,5 @@
-D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/EWIEGA46WW/moc_tictactoetests.cpp: D:/QT/TicTacToeGame/tests/tictactoetests.h \
-  D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/moc_predefs.h \
+D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/EWIEGA46WW/moc_tictactoetests.cpp: D:/QT/TicTacToeGame/tests/tictactoetests.h \
+  D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/moc_predefs.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QAbstractItemModel \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QDeadlineTimer \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QDebug \
@@ -11,6 +11,7 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeT
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QMetaEnum \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QMutex \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QObject \
+  C:/Qt6/6.6.1/mingw_64/include/QtCore/QPointer \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QRect \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QSize \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/QSizeF \
@@ -671,4 +672,5 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeT
   C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
+  C:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h \
+  D:/QT/TicTacToeGame/src/gameboard.h

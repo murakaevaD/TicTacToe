@@ -1,5 +1,6 @@
-D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/EWIEGA46WW/moc_mainwindow.cpp: D:/QT/TicTacToeGame/gui/mainwindow.h \
-  D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/moc_predefs.h \
+D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen/EWIEGA46WW/moc_mainwindow.cpp: D:/QT/TicTacToeGame/gui/mainwindow.h \
+  D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen/moc_predefs.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtCore/QTimer \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/q20functional.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/q20memory.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/q20type_traits.h \
@@ -13,6 +14,7 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qatomic.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qatomic_cxx11.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qbasicatomic.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtCore/qbasictimer.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qbindingstorage.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qbytearray.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -42,6 +44,7 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qglobalstatic.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qhash.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qhashfunctions.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtCore/qiodevice.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qiterable.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qiterator.h \
@@ -100,6 +103,7 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtdeprecationmarkers.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtenvironmentvariables.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtextstream.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtCore/qtimer.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtmetamacros.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtnoop.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -110,6 +114,7 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtversionchecks.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtypeinfo.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qtypes.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtCore/qurl.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qutf8stringview.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qvariant.h \
   C:/Qt6/6.6.1/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -128,12 +133,14 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qpaintdevice.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qpalette.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtGui/qpicture.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qpixelformat.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qpixmap.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qpolygon.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qregion.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qrgb.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qrgba64.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtGui/qtextdocument.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qtgui-config.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qtguiexports.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qtguiglobal.h \
@@ -142,17 +149,27 @@ D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt6/6.6.1/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QGridLayout \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QLabel \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QMainWindow \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QMessageBox \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QPushButton \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QRadioButton \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QSpinBox \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QVBoxLayout \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/QWidget \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qabstractbutton.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qabstractspinbox.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qboxlayout.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qdialog.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qgridlayout.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qlayout.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qlayoutitem.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qmainwindow.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qmessagebox.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qpushbutton.h \
+  C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qradiobutton.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qspinbox.h \
   C:/Qt6/6.6.1/mingw_64/include/QtWidgets/qtabwidget.h \
