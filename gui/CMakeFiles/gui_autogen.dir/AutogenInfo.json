@@ -1,12 +1,12 @@
 {
-	"BUILD_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen",
-	"CMAKE_BINARY_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release",
-	"CMAKE_CURRENT_BINARY_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui",
+	"BUILD_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen",
+	"CMAKE_BINARY_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui",
 	"CMAKE_CURRENT_SOURCE_DIR" : "D:/QT/TicTacToeGame/gui",
 	"CMAKE_EXECUTABLE" : "C:/Qt6/Tools/CMake_64/bin/cmake.exe",
 	"CMAKE_LIST_FILES" : [ "D:/QT/TicTacToeGame/gui/CMakeLists.txt" ],
 	"CMAKE_SOURCE_DIR" : "D:/QT/TicTacToeGame",
-	"DEP_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/deps",
+	"DEP_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "gui_autogen/timestamp",
 	"HEADERS" : 
 	[
@@ -18,14 +18,13 @@
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/include",
-	"MOC_COMPILATION_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen/include",
+	"MOC_COMPILATION_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
-		"QT_NO_DEBUG",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -43,7 +42,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui",
+		"D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui",
 		"D:/QT/TicTacToeGame/gui",
 		"D:/QT/TicTacToeGame/src",
 		"C:/Qt6/6.6.1/mingw_64/include/QtWidgets",
@@ -77,20 +76,20 @@
 		"-c",
 		"C:/Qt6/Tools/CMake_64/share/cmake-3.27/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/gui_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/gui_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/ui_mainwindow.h"
+		"D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/ui_mainwindow.h"
 	],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 4,
-	"PARSE_CACHE_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/CMakeFiles/gui_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/CMakeFiles/gui_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "C:/Qt6/6.6.1/mingw_64/./bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "C:/Qt6/6.6.1/mingw_64/./bin/uic.exe",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 6,
-	"SETTINGS_FILE" : "D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/CMakeFiles/gui_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/CMakeFiles/gui_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[ "D:/QT/TicTacToeGame/gui/main.cpp", "MU", null ],
@@ -101,7 +100,7 @@
 	"UIC_SKIP" : 
 	[
 		"D:/QT/TicTacToeGame/gui/mainwindow.ui",
-		"D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/gui/ui_mainwindow.h"
+		"D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/gui/ui_mainwindow.h"
 	],
 	"UIC_UI_FILES" : [],
 	"VERBOSITY" : 0

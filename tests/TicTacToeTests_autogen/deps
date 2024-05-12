@@ -10,6 +10,7 @@ TicTacToeTests_autogen/timestamp: \
 	C:/Qt6/6.6.1/mingw_64/include/QtCore/QMetaEnum \
 	C:/Qt6/6.6.1/mingw_64/include/QtCore/QMutex \
 	C:/Qt6/6.6.1/mingw_64/include/QtCore/QObject \
+	C:/Qt6/6.6.1/mingw_64/include/QtCore/QPointer \
 	C:/Qt6/6.6.1/mingw_64/include/QtCore/QRect \
 	C:/Qt6/6.6.1/mingw_64/include/QtCore/QSize \
 	C:/Qt6/6.6.1/mingw_64/include/QtCore/QSizeF \
@@ -706,6 +707,6 @@ TicTacToeTests_autogen/timestamp: \
 	D:/QT/TicTacToeGame/tests/CMakeLists.txt \
 	D:/QT/TicTacToeGame/tests/tictactoetests.cpp \
 	D:/QT/TicTacToeGame/tests/tictactoetests.h \
-	D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/.qtc/package-manager/auto-setup.cmake \
-	D:/QT/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Release/tests/TicTacToeTests_autogen/moc_predefs.h \
+	D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake \
+	D:/QT/build/build-TicTacToeGame-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/tests/TicTacToeTests_autogen/moc_predefs.h \
 	C:/Qt6/Tools/CMake_64/bin/cmake.exe
