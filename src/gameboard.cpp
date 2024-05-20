@@ -119,43 +119,61 @@ void GameBoard::makeRandomMove() {
 }
 
 void GameBoard::expandBoard(int row, int col) {
-    const int maxSize = 15;
+    const int maxSize = 18;
     if (boardSize >= maxSize) return;
 
     bool expanded = false;
     if (row == 0 && col == 0) {
-        board.insert(board.begin(), std::vector<Player>(boardSize, Player::None));
-        for (auto& r : board) {
-            r.insert(r.begin(), Player::None);
+        for(int i = 0; i < 3; ++i){
+            board.insert(board.begin(), std::vector<Player>(boardSize, Player::None));
         }
-        expanded = true;
+        for(int i = 0; i < 3; ++i){
+            for (auto& r : board) {
+                r.insert(r.begin(), Player::None);
+            }
+            expanded = true;
+        }
     }
     if (row == 0 && col == boardSize - 1) {
-        board.insert(board.begin(), std::vector<Player>(boardSize, Player::None));
-        for (auto& r : board) {
-            r.push_back(Player::None);
+        for(int i = 0; i < 3; ++i){
+            board.insert(board.begin(), std::vector<Player>(boardSize, Player::None));
         }
-        expanded = true;
+        for(int i = 0; i < 3; ++i){
+            for (auto& r : board) {
+                r.push_back(Player::None);
+            }
+            expanded = true;
+        }
     }
 
     if (row == boardSize - 1 && col == 0) {
-        board.push_back(std::vector<Player>(boardSize, Player::None));
-        for (auto& r : board) {
-            r.insert(r.begin(), Player::None);
+        for(int i = 0; i < 3; ++i){
+            board.push_back(std::vector<Player>(boardSize, Player::None));
         }
-        expanded = true;
+        for(int i = 0; i < 3; ++i){
+            for (auto& r : board) {
+                r.insert(r.begin(), Player::None);
+            }
+            expanded = true;
+        }
     }
 
     if (row == boardSize - 1 && col == boardSize - 1) {
-        board.push_back(std::vector<Player>(boardSize, Player::None));
-        for (auto& r : board) {
-            r.push_back(Player::None);
+        for(int i = 0; i < 3; ++i){
+            board.push_back(std::vector<Player>(boardSize, Player::None));
         }
-        expanded = true;
+        for(int i = 0; i < 3; ++i){
+            for (auto& r : board) {
+                r.push_back(Player::None);
+            }
+            expanded = true;
+        }
     }
 
-    if (expanded) {
-        boardSize++;
+    for(int i = 0; i < 3; ++i){
+        if (expanded) {
+            boardSize++;
+        }
     }
 }
 

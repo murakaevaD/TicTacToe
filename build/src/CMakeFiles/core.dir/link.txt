@@ -1,0 +1,2 @@
+C:/gcc/bin/ar.exe qc libcore.a CMakeFiles/core.dir/core_autogen/mocs_compilation.cpp.obj CMakeFiles/core.dir/gameboard.cpp.obj
+C:/gcc/bin/ranlib.exe libcore.a

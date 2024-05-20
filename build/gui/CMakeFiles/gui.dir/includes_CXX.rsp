@@ -1,0 +1,1 @@
+-ID:/QT/TicTacToe/build/gui -ID:/QT/TicTacToe/gui -ID:/QT/TicTacToe/build/gui/gui_autogen/include -ID:/QT/TicTacToe/src -isystem C:/Qt6/6.6.1/mingw_64/include/QtWidgets -isystem C:/Qt6/6.6.1/mingw_64/include -isystem C:/Qt6/6.6.1/mingw_64/include/QtCore -isystem "C:/Qt6/6.6.1/mingw_64/mkspecs/win32-g++" -isystem C:/Qt6/6.6.1/mingw_64/include/QtGui

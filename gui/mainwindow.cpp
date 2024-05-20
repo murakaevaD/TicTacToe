@@ -8,14 +8,14 @@
 #include <QLabel>
 #include <QSpinBox>
 
+
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), menuWidget(nullptr), gameWidget(nullptr), expandingFieldButton(nullptr),
     fixedFieldButton(nullptr), sizeLabel(nullptr), sizeSpinBox(nullptr), winConditionLabel(nullptr), winConditionSpinBox(nullptr),
     playerXButton(nullptr), playerOButton(nullptr), humanButton(nullptr), computerButton(nullptr), newGameButton(nullptr),
     turnStatusLabel(nullptr), gridLayout(nullptr), board(nullptr), againstHuman(true) {
     QWidget* centralWidget = new QWidget(this);
     QVBoxLayout* centralLayout = new QVBoxLayout(centralWidget);
-
-    this->setFixedSize(700, 700);
 
     setupMenuUI();
     setupGameUI();
@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), menuWidget(nullpt
     gameWidget->hide();
 
     setCentralWidget(centralWidget);
+
+    this->showMaximized();
 }
 
 MainWindow::~MainWindow() {
@@ -51,7 +53,7 @@ void MainWindow::setupMenuUI() {
 
     winConditionLabel = new QLabel("Количество символов для победы:");
     winConditionSpinBox = new QSpinBox();
-    winConditionSpinBox->setRange(3, 15);
+    winConditionSpinBox->setRange(3, 18);
     winConditionSpinBox->setValue(3);
 
     QGroupBox *playerGroup = new QGroupBox("Играть за:");
@@ -254,11 +256,11 @@ void MainWindow::updateBoard() {
     int boardSize = board->size();
 
     resizeButtons(boardSize);
-
     for (int row = 0; row < boardSize; ++row) {
         for (int col = 0; col < boardSize; ++col) {
             QPushButton *button = buttons[row][col];
             Player player = board->getPlayerAt(row, col);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setText(player == Player::X ? "X" : (player == Player::O ? "O" : ""));
             button->setEnabled(player == Player::None);
         }

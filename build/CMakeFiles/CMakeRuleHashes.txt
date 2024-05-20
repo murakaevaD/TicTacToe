@@ -1,0 +1,8 @@
+# Hashes of file build rules.
+f1fea70e8bdc4e4bcf6d2c1f22b69874 gui/CMakeFiles/gui_autogen
+67e600c8d29024c12dbc498af3d95bfa gui/gui_autogen/timestamp
+fdadc84613bd3132d199c3f96dfe2c3f gui/ui_mainwindow.h
+86ca0860465db976ab0db0d5716fea82 src/CMakeFiles/core_autogen
+43992bf39f13374ae9bd6c8c4248c7d1 src/core_autogen/timestamp
+7f6e7b3697ebefb30afe72acc3fe0c9b tests/CMakeFiles/TicTacToeTests_autogen
+a09b47b47f53fc28bafe1d7ed14312a5 tests/TicTacToeTests_autogen/timestamp

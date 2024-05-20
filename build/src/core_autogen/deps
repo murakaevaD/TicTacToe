@@ -1,0 +1,5 @@
+core_autogen/timestamp: \
+	D:/QT/TicTacToe/src/CMakeLists.txt \
+	D:/QT/TicTacToe/src/gameboard.cpp \
+	D:/QT/TicTacToe/src/gameboard.h \
+	C:/Program\ Files/CMake/bin/cmake.exe

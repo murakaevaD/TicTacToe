@@ -14,6 +14,7 @@ void TestGameBoard::testHorizontalWin() {
     board->makeMove(1, 1); // O
     board->makeMove(0, 2); // X
     QVERIFY(board->checkWin(board->boardSize));
+    delete board;
 
     // Победа во второй строке
     GameBoard board2(3);
@@ -154,6 +155,7 @@ void TestGameBoard::testDraw5() {
 }
 
 void TestGameBoard::testComputerMoves() {
+    board = new GameBoard(3);
     board->clearBoard();                 //Cбрасываем текущую доску
     board->setCurrentPlayer(Player::X);  // Пусть компьютер играет за 'X'
     board->makeRandomMove();  // Позволяем компьютеру сделать ход
@@ -168,6 +170,7 @@ void TestGameBoard::testComputerMoves() {
     }
 
     QCOMPARE(emptyCells, 8);  // Проверяем, что пустых клеток стало на 1 меньше
+    delete board;
 }
 
 void TestGameBoard::testGameAgainstComputer() {
@@ -193,52 +196,47 @@ void TestGameBoard::testGameAgainstComputer() {
     delete board;
 }
 
-void TestGameBoard::testExpandTopLeftCorner()
-{
+void TestGameBoard::testExpandTopLeftCorner() {
     GameBoard gameBoard;
     gameBoard.expandBoard(0, 0);
-    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.boardSize, 6); // Размер поля увеличился на 1
     QCOMPARE(gameBoard.getPlayerAt(0, 0), Player::None); // Левый верхний угол пустой
     QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
 }
 
-void TestGameBoard::testExpandTopRightCorner()
-{
+void TestGameBoard::testExpandTopRightCorner() {
     GameBoard gameBoard;
     gameBoard.expandBoard(0, 2);
-    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.boardSize, 6); // Размер поля увеличился на 1
     QCOMPARE(gameBoard.getPlayerAt(0, 3), Player::None); // Правый верхний угол пустой
     QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
 }
 
-void TestGameBoard::testExpandBottomLeftCorner()
-{
+void TestGameBoard::testExpandBottomLeftCorner() {
     GameBoard gameBoard;
     gameBoard.expandBoard(2, 0);
-    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.boardSize, 6); // Размер поля увеличился на 1
     QCOMPARE(gameBoard.getPlayerAt(3, 0), Player::None); // Левый нижний угол пустой
     QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
 }
 
-void TestGameBoard::testExpandBottomRightCorner()
-{
+void TestGameBoard::testExpandBottomRightCorner() {
     GameBoard gameBoard;
     gameBoard.expandBoard(2, 2);
-    QCOMPARE(gameBoard.boardSize, 4); // Размер поля увеличился на 1
+    QCOMPARE(gameBoard.boardSize, 6); // Размер поля увеличился на 1
     QCOMPARE(gameBoard.getPlayerAt(3, 3), Player::None); // Правый нижний угол пустой
     QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
 }
 
-void TestGameBoard::testIgnoreExpansionAtMaxSize()
-{
+void TestGameBoard::testIgnoreExpansionAtMaxSize() {
     GameBoard gameBoard;
     // Заполним игровое поле до максимального размера
-    while (gameBoard.boardSize < 15) {
+    while (gameBoard.boardSize < 18) {
         gameBoard.expandBoard(0, 0);
     }
     // Попробуем расширить поле еще раз
     gameBoard.expandBoard(0, 0);
-    QCOMPARE(gameBoard.boardSize, 15); // Размер поля не изменился
+    QCOMPARE(gameBoard.boardSize, 18); // Размер поля не изменился
     QCOMPARE(gameBoard.getPlayerAt(1, 1), Player::None); // Проверка центра
 }
 
@@ -287,8 +285,10 @@ void TestGameBoard::testMemoryLeak() {
 
 
 void TestGameBoard::cleanupTestCase() {
+    board = new GameBoard(3);
     delete board;
     board = nullptr;
+    QVERIFY(board == nullptr);
 }
 
 QTEST_MAIN(TestGameBoard)
