@@ -15,7 +15,8 @@ public:
     bool isBoardFull() const;
     void setCurrentPlayer(Player player);
     Player currentPlayer() const;
-    int size() const;
+    int sizeX() const;
+    int sizeY() const;
     Player getPlayerAt(int row, int col) const;
     void makeRandomMove();
     void expandBoard(int row, int col);
@@ -25,7 +26,8 @@ public:
 
 private:
     std::vector<std::vector<Player>> board;
-    int boardSize;
+    int boardSizeX;
+    int boardSizeY;
     Player current;
     bool expandingMode;
 

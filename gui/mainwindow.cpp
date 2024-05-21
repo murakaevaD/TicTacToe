@@ -154,7 +154,7 @@ void MainWindow::startNewGame() {
         board->setExpandingMode(true);
         winConditions = winConditionSpinBox->value();
     } else{
-        winConditions = board->size();
+        winConditions = sizeSpinBox->value();
     }
 
     againstHuman = humanButton->isChecked();
@@ -253,11 +253,11 @@ void MainWindow::handleBoard() {
 }
 
 void MainWindow::updateBoard() {
-    int boardSize = board->size();
-
-    resizeButtons(boardSize);
-    for (int row = 0; row < boardSize; ++row) {
-        for (int col = 0; col < boardSize; ++col) {
+    int boardSizeX = board->sizeX();
+    int boardSizeY = board->sizeY();
+    resizeButtons(boardSizeX, boardSizeY);
+    for (int row = 0; row < boardSizeY; ++row) {
+        for (int col = 0; col < boardSizeX; ++col) {
             QPushButton *button = buttons[row][col];
             Player player = board->getPlayerAt(row, col);
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -267,7 +267,7 @@ void MainWindow::updateBoard() {
     }
 }
 
-void MainWindow::resizeButtons(int newSize) {
+void MainWindow::resizeButtons(int x, int y) {
     QLayoutItem *child;
     while ((child = gridLayout->takeAt(0)) != nullptr) {
         delete child->widget();
@@ -275,10 +275,10 @@ void MainWindow::resizeButtons(int newSize) {
     }
 
     buttons.clear();
+    buttons.resize(y, std::vector<QPushButton*>(x, nullptr));
 
-    buttons.resize(newSize, std::vector<QPushButton*>(newSize, nullptr));
-    for (int row = 0; row < newSize; ++row) {
-        for (int col = 0; col < newSize; ++col) {
+    for (int row = 0; row < y; ++row) {
+        for (int col = 0; col < x; ++col) {
             QPushButton *button = new QPushButton();
             button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             button->setFont(QFont("Arial", 24));

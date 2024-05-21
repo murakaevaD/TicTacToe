@@ -56,7 +56,7 @@ private:
     void setupGameUI();
     void finalizeGame();
     void disableBoard();
-    void resizeButtons(int newSize);
+    void resizeButtons(int x, int y);
     void toggleFixedField();
     void toggleExpandingField();
     void toggleSurrenderButton();

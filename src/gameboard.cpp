@@ -1,12 +1,12 @@
 #include "gameboard.h"
 #include <cstdlib>
 
-GameBoard::GameBoard(int size) : boardSize(size), current(Player::X), expandingMode(false) {
-    board.resize(boardSize, std::vector<Player>(boardSize, Player::None));
+GameBoard::GameBoard(int size) : boardSizeX(size), boardSizeY(size), current(Player::X), expandingMode(false) {
+    board.resize(boardSizeX, std::vector<Player>(boardSizeY, Player::None));
 }
 
 void GameBoard::makeMove(int row, int col) {
-    if (row >= 0 && row < boardSize && col >= 0 && col < boardSize && board[row][col] == Player::None) {
+    if (row >= 0 && row < boardSizeY && col >= 0 && col < boardSizeX && board[row][col] == Player::None) {
         board[row][col] = current;
         if (expandingMode) {
             expandBoard(row, col);
@@ -16,19 +16,22 @@ void GameBoard::makeMove(int row, int col) {
 }
 
 bool GameBoard::isWin(Player player, int winCondition) const {
-    // Проверяем горизонтальные и вертикальные линии
-    for (int i = 0; i < boardSize; ++i) {
-        int rowWinCount = 0, colWinCount = 0;
-        for (int j = 0; j < boardSize; ++j) {
-            // Горизонтальные линии
+    for (int i = 0; i < boardSizeY; ++i) {
+        int rowWinCount = 0;
+        for (int j = 0; j < boardSizeX; ++j) {
             if (board[i][j] == player) {
                 rowWinCount++;
                 if (rowWinCount == winCondition) return true;
             } else {
                 rowWinCount = 0;
             }
-            // Вертикальные линии
-            if (board[j][i] == player) {
+        }
+    }
+
+    for (int j = 0; j < boardSizeX; ++j) {
+        int colWinCount = 0;
+        for (int i = 0; i < boardSizeY; ++i) {
+            if (board[i][j] == player) {
                 colWinCount++;
                 if (colWinCount == winCondition) return true;
             } else {
@@ -37,12 +40,11 @@ bool GameBoard::isWin(Player player, int winCondition) const {
         }
     }
 
-    // Проверяем главную диагональ
-    for (int i = 0; i <= boardSize - winCondition; ++i) {
-        for (int j = 0; j <= boardSize - winCondition; ++j) {
+    for (int i = 0; i <= boardSizeY - winCondition; ++i) {
+        for (int j = 0; j <= boardSizeX - winCondition; ++j) {
             bool diagWin = true;
             for (int k = 0; k < winCondition; ++k) {
-                if (board[i+k][j+k] != player) {
+                if (board[i + k][j + k] != player) {
                     diagWin = false;
                     break;
                 }
@@ -51,12 +53,11 @@ bool GameBoard::isWin(Player player, int winCondition) const {
         }
     }
 
-    // Проверяем побочную диагональ
-    for (int i = 0; i <= boardSize - winCondition; ++i) {
-        for (int j = winCondition - 1; j < boardSize; ++j) {
+    for (int i = 0; i <= boardSizeY - winCondition; ++i) {
+        for (int j = winCondition - 1; j < boardSizeX; ++j) {
             bool diagWin = true;
             for (int k = 0; k < winCondition; ++k) {
-                if (board[i+k][j-k] != player) {
+                if (board[i + k][j - k] != player) {
                     diagWin = false;
                     break;
                 }
@@ -90,19 +91,23 @@ Player GameBoard::currentPlayer() const {
     return current;
 }
 
-int GameBoard::size() const {
-    return boardSize;
+int GameBoard::sizeY() const {
+    return boardSizeY;
+}
+
+int GameBoard::sizeX() const {
+    return boardSizeX;
 }
 
 Player GameBoard::getPlayerAt(int row, int col) const {
-    return (row >= 0 && row < boardSize && col >= 0 && col < boardSize) ? board[row][col] : Player::None;
+    return (row >= 0 && row < sizeY() && col >= 0 && col < sizeX()) ? board[row][col] : Player::None;
 }
 
 void GameBoard::makeRandomMove() {
     std::vector<std::pair<int, int>> freeCells;
 
-    for (int row = 0; row < boardSize; ++row) {
-        for (int col = 0; col < boardSize; ++col) {
+    for (int row = 0; row < boardSizeX; ++row) {
+        for (int col = 0; col < boardSizeX; ++col) {
             if (board[row][col] == Player::None) {
                 freeCells.emplace_back(row, col);
             }
@@ -120,62 +125,54 @@ void GameBoard::makeRandomMove() {
 
 void GameBoard::expandBoard(int row, int col) {
     const int maxSize = 18;
-    if (boardSize >= maxSize) return;
-
     bool expanded = false;
-    if (row == 0 && col == 0) {
-        for(int i = 0; i < 3; ++i){
-            board.insert(board.begin(), std::vector<Player>(boardSize, Player::None));
+
+    if (row == 0 && boardSizeY + 3 <= maxSize) { // Expand upwards
+        for (int i = 0; i < 3; ++i) {
+            board.insert(board.begin(), std::vector<Player>(boardSizeX, Player::None));
         }
-        for(int i = 0; i < 3; ++i){
-            for (auto& r : board) {
+        boardSizeY += 3;
+        expanded = true;
+    }
+
+    if (row == boardSizeY - 1 && boardSizeY + 3 <= maxSize) { // Expand downwards
+        for (int i = 0; i < 3; ++i) {
+            board.push_back(std::vector<Player>(boardSizeX, Player::None));
+        }
+        boardSizeY += 3;
+        expanded = true;
+    }
+
+    if (col == 0 && boardSizeX + 3 <= maxSize) { // Expand leftwards
+        for (auto& r : board) {
+            for (int i = 0; i < 3; ++i) {
                 r.insert(r.begin(), Player::None);
             }
-            expanded = true;
         }
+        boardSizeX += 3;
+        expanded = true;
     }
-    if (row == 0 && col == boardSize - 1) {
-        for(int i = 0; i < 3; ++i){
-            board.insert(board.begin(), std::vector<Player>(boardSize, Player::None));
-        }
-        for(int i = 0; i < 3; ++i){
-            for (auto& r : board) {
+
+    if (col == boardSizeX - 1 && boardSizeX + 3 <= maxSize) { // Expand rightwards
+        for (auto& r : board) {
+            for (int i = 0; i < 3; ++i) {
                 r.push_back(Player::None);
             }
-            expanded = true;
         }
+        boardSizeX += 3;
+        expanded = true;
     }
 
-    if (row == boardSize - 1 && col == 0) {
-        for(int i = 0; i < 3; ++i){
-            board.push_back(std::vector<Player>(boardSize, Player::None));
+    if (expanded) {
+        if (boardSizeX > maxSize) {
+            boardSizeX = maxSize;
         }
-        for(int i = 0; i < 3; ++i){
-            for (auto& r : board) {
-                r.insert(r.begin(), Player::None);
-            }
-            expanded = true;
-        }
-    }
-
-    if (row == boardSize - 1 && col == boardSize - 1) {
-        for(int i = 0; i < 3; ++i){
-            board.push_back(std::vector<Player>(boardSize, Player::None));
-        }
-        for(int i = 0; i < 3; ++i){
-            for (auto& r : board) {
-                r.push_back(Player::None);
-            }
-            expanded = true;
-        }
-    }
-
-    for(int i = 0; i < 3; ++i){
-        if (expanded) {
-            boardSize++;
+        if (boardSizeY > maxSize) {
+            boardSizeY = maxSize;
         }
     }
 }
+
 
 void GameBoard::reset() {
     for (auto& row : board) {
